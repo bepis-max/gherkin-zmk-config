@@ -1,171 +1,29 @@
-/*
- * Copyright (c) 2020 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/outputs.h>
-
-#define L_ONE 0
-#define L_TWO 1
-#define L_SYS 2
 
 / {
-
-    // MACRO DOCS: https://zmk.dev/docs/behaviors/macros
-    // REFERENCE FOR IDEAS: https://logickeyboard.com/shop/adobe-graphic-designer-astra-2-backlit-pc-keyboard-4634p.html
-
-    macros {
-        p_layer_one: p_layer_one {
-            label = "ZM_p_layer_one";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <20>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp L>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp MINUS &kp NUMBER_1>
-                ;
-        };
-        p_layer_two: p_layer_two {
-            label = "ZM_p_layer_two";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <20>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp L>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp MINUS &kp NUMBER_2>
-                ;
-        };
-        p_layer_sys: p_layer_sys {
-            label = "ZM_p_layer_sys";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <20>;
-            bindings
-                = <&macro_press &kp LSHFT>
-                , <&macro_tap &kp L>
-                , <&macro_release &kp LSHFT>
-                , <&macro_tap &kp MINUS>
-                , <&macro_press &kp LSHFT>
-                , <&macro_tap &kp S &kp Y &kp S>
-                , <&macro_release &kp LSHFT>
-                ;
-        };
-        get_new_build: get_new_build {
-            label = "ZM_get_new_build";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <10>;
-            tap-ms = <20>;
-            bindings
-                = <&macro_wait_time 250>
-                , <&macro_tap &kp LEFT_GUI>
-                , <&macro_wait_time 10>
-                , <&macro_tap &kp C &kp H &kp R &kp O &kp M>
-                , <&macro_wait_time 1000>
-                , <&macro_tap &kp E &kp ENTER>
-                , <&macro_wait_time 100>
-                , <&macro_press &kp LCTRL>
-                , <&macro_tap &kp L>
-                , <&macro_release &kp LCTRL>
-                , <&macro_wait_time 10>
-                , <&macro_tap &kp G &kp I &kp T &kp H &kp U &kp B &kp KP_DOT &kp C &kp O &kp M &kp KP_SLASH>
-                , <&macro_tap &kp D &kp A &kp N &kp R &kp I &kp C &kp H &kp O &kp KP_SLASH>
-                , <&macro_tap &kp G &kp H &kp E &kp R &kp K &kp I &kp N &kp KP_MINUS &kp Z &kp M &kp K &kp KP_MINUS &kp C &kp O &kp N &kp F &kp I &kp G &kp KP_SLASH>
-                , <&macro_tap &kp A &kp C &kp T &kp I &kp O &kp N &kp S &kp ENTER>
-                ;
-        };
-
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
-        // BLANK BINDINGS
-        // bindings = <
-        //    &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-        //    &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans 
-        //    &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans 
-        // >;
-
-        layer_one { // AKA 'L_ONE'
-            
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | LEFT  |       |   A   |       |       |       |       | GH_AC |       | L_ONE |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | DOWN  |  UP   |   1   |       |       |       |       |       |       | L_TWO |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | RIGHT |       |  P_L  |       |       |       |       |       |       | L_SYS |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            
+        default_layer {
             bindings = <
-                &kp LEFT  &trans  &kp A         &trans  &trans  &trans  &trans  &get_new_build  &trans  &to L_ONE
-                &kp DOWN  &kp UP  &kp NUMBER_1  &trans  &trans  &trans  &trans  &trans          &trans  &to L_TWO 
-                &kp RIGHT &trans  &p_layer_one  &trans  &trans  &trans  &trans  &trans          &trans  &to L_SYS
+                &kp Q    &kp W    &kp E    &kp R    &kp T    &kp Y
+                &kp A    &kp S    &kp D    &kp F    &kp G    &kp H
+                &kp Z    &kp X    &kp C    &kp V    &kp B    &kp N
+                &kp P    &kp U    &kp I    &kp O    &kp BSPC &kp ENTER
+                &kp LSFT &kp LCTL &kp LALT &mo 1    &kp SPC  &kp J
             >;
         };
 
-        layer_two { // AKA 'L_TWO'
-
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | LEFT  |       |   B   |       |       |       |       |       |       | L_ONE |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | DOWN  |  UP   |   2   |       |       |       |       |       |       | L_TWO |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | RIGHT |       |  P_L  |       |       |       |       |       |       | L_SYS |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-
+        fn_layer {
             bindings = <
-                &kp LEFT   &trans  &kp B         &trans  &trans  &trans  &trans  &trans  &trans  &to L_ONE
-                &kp DOWN   &kp UP  &kp NUMBER_2  &trans  &trans  &trans  &trans  &trans  &trans  &to L_TWO
-                &kp RIGHT  &trans  &p_layer_two  &trans  &trans  &trans  &trans  &trans  &trans  &to L_SYS
+                &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6
+                &kp N7      &kp N8      &kp N9      &kp N0      &kp MINUS   &kp EQUAL
+                &kp LBKT    &kp RBKT    &kp BSLH    &kp SEMI    &kp SQT     &kp GRAVE
+                &kp COMMA   &kp DOT     &kp FSLH    &trans      &kp DEL     &kp ESC
+                &trans      &trans      &trans      &trans      &trans      &kp K
             >;
         };
-
-        system_layer { // AKA 'L_SYS'
-
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | LEFT  |       |   C   |       | M_BLE |       | BT_3  | BT_0  |       | L_ONE |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | DOWN  |  UP   |   3   |       | M_USB |       | BT_4  | BT_1  |       | L_TWO |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-            // |       |       |       |       |       |       |       |       |       |       |
-            // | RIGHT |       |  P_L  |       | LOAD  |       | BT_CL | BT_2  |       | L_SYS |
-            // |       |       |       |       |       |       |       |       |       |       |
-            // +-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
-
-            bindings = <
-                &kp LEFT   &trans  &kp C         &trans &out OUT_BLE  &trans  &bt BT_SEL 3  &bt BT_SEL 0  &trans  &to L_ONE
-                &kp DOWN   &kp UP  &kp NUMBER_3  &trans &out OUT_USB  &trans  &bt BT_SEL 4  &bt BT_SEL 1  &trans  &to L_TWO
-                &kp RIGHT  &trans  &p_layer_sys  &trans &bootloader   &trans  &bt BT_CLR    &bt BT_SEL 2  &trans  &to L_SYS
-            >;
-        };
-        
     };
 };
